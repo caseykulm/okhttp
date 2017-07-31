@@ -690,6 +690,12 @@ public final class HttpUrlTest {
         HttpUrl.parse("http://github.com/%%30%30").pathSegments());
   }
 
+  @Test
+  public void malformedPercentEncodingAsterisk() {
+    assertEquals("http://host/foo%25%2A",
+        HttpUrl.parse("http://host/foo%*"));
+  }
+
   @Test public void malformedUtf8Encoding() {
     // Replace a partial UTF-8 sequence with the Unicode replacement character.
     assertEquals(Arrays.asList("a", "\ufffdx", "c"),
